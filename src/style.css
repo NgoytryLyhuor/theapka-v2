@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* Custom animations */
+@keyframes breathing {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px 0 rgba(236, 72, 153, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.4);
+  }
+}
+
+@keyframes arrow-bounce {
+  0%, 100% {
+    transform: rotate(45deg) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(45deg) translateY(10px);
+    opacity: 0.5;
+  }
+}
+
+.animate-breathing {
+  animation: breathing 2.5s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Custom Khmer fonts */
+.font-dangrek {
+  font-family: 'Dangrek', sans-serif;
+}
+
+.font-kantumruy {
+  font-family: 'Kantumruy Pro', sans-serif;
+}
+
+.font-moulpali {
+  font-family: 'Moulpali', sans-serif;
+}
+
+.font-battambang {
+  font-family: 'Battambang', sans-serif;
+}
+
+.font-fasthand {
+  font-family: 'Fasthand', cursive;
+}
+
+/* Down arrow animation */
+.down-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 3px solid white;
+  border-bottom: 3px solid white;
+  transform: rotate(45deg);
+  animation: arrow-bounce 1.5s infinite;
+}
+
+/* Guest name elegant styling */
+.guest-name-glow {
+  color: #FFD700;
+  text-shadow: 
+    0 0 10px rgba(255, 215, 0, 0.8),
+    0 0 20px rgba(255, 215, 0, 0.6),
+    0 0 30px rgba(255, 215, 0, 0.4),
+    2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px rgba(255, 215, 0, 0.8),
+      0 0 20px rgba(255, 215, 0, 0.6),
+      0 0 30px rgba(255, 215, 0, 0.4),
+      2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    text-shadow: 
+      0 0 15px rgba(255, 215, 0, 1),
+      0 0 30px rgba(255, 215, 0, 0.8),
+      0 0 45px rgba(255, 215, 0, 0.6),
+      2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+#app {
+  width: 100%;
+}
