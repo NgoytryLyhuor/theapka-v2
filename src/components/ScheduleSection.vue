@@ -1,72 +1,89 @@
 <script setup>
-import { weddingConfig } from '../config/guests'
-
 const props = defineProps({
-  backgroundImage: { type: String, default: '' },
-  location: { type: String, default: 'ភ្នំពេញ' },
-  mapUrl: { type: String, default: '' }
+  backgroundImage: {
+    type: String,
+    default: 'https://theapka.com/storage/01J4TYV5XJP7PKF7RPH3KE6238.jpg'
+  },
+  location: {
+    type: String,
+    default: 'ភ្នំពេញ'
+  },
+  mapUrl: {
+    type: String,
+    default: 'https://goo.gl/maps/m6QhfxtiAx7g51yy6'
+  }
 })
-
-// Schedule items
-const scheduleItems = [
-  { time: '១៦:០០', event: 'ទទួលភ្ញៀវ', icon: '🎊' },
-  { time: '១៧:០០', event: 'ពិធីមង្គលការ', icon: '💒' },
-  { time: '១៨:៣០', event: 'ពិធីជប់លៀង', icon: '🍽️' },
-  { time: '២១:០០', event: 'បញ្ចប់កម្មវិធី', icon: '🎉' }
-]
 </script>
 
 <template>
-  <div class="w-full py-16 bg-gradient-to-b from-white to-rose-50">
+  <div class="w-full py-16 bg-gradient-to-b from-white to-amber-50">
     <div class="max-w-md px-6 mx-auto">
       
-      <!-- Title -->
-      <div class="mb-10 text-center">
-        <span class="text-4xl">📋</span>
-        <h2 class="mt-4 text-2xl text-rose-800 font-moulpali">
-          កម្មវិធីមង្គលការ
+      <!-- Section Title -->
+      <div class="mb-12 text-center">
+        <div class="inline-block px-6 py-2 mb-4 border rounded-full border-amber-300 bg-amber-50">
+          <span class="text-sm tracking-widest text-amber-700 uppercase font-kantumruy">Event Schedule</span>
+        </div>
+        <h2 class="text-2xl text-amber-900 font-moulpali">
+          កម្មវិធីមង្គលអាពាហ៍ពិពាហ៍
         </h2>
-        <p class="mt-2 text-gray-500 font-kantumruy">Wedding Schedule</p>
       </div>
 
-      <!-- Timeline -->
-      <div class="relative">
-        <!-- Vertical line -->
-        <div class="absolute w-1 h-full transform -translate-x-1/2 bg-gradient-to-b from-pink-200 via-rose-300 to-pink-200 left-8 rounded-full"></div>
-        
-        <!-- Schedule items -->
-        <div class="space-y-8">
-          <div 
-            v-for="(item, index) in scheduleItems" 
-            :key="index"
-            class="relative flex items-center gap-6 pl-4"
-          >
-            <!-- Circle -->
-            <div class="relative z-10 flex items-center justify-center w-8 h-8 text-lg bg-white border-4 border-pink-400 rounded-full shadow-lg">
-              {{ item.icon }}
-            </div>
-            
-            <!-- Content -->
-            <div class="flex-1 p-4 transition-all bg-white shadow-md rounded-2xl hover:shadow-xl hover:-translate-y-1">
-              <div class="text-lg font-bold text-rose-600 font-dangrek">{{ item.time }}</div>
-              <div class="text-gray-700 font-kantumruy">{{ item.event }}</div>
-            </div>
+      <!-- Schedule Card -->
+      <div class="overflow-hidden bg-white shadow-xl rounded-3xl">
+        <!-- Header Image -->
+        <div class="relative h-48 bg-center bg-cover" 
+          :style="{ backgroundImage: `url('${props.backgroundImage}')` }">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-6">
+            <p class="text-lg font-bold text-white font-dangrek">{{ props.location }}</p>
           </div>
         </div>
-      </div>
 
-      <!-- Location -->
-      <div class="p-6 mt-10 text-center bg-white shadow-lg rounded-3xl">
-        <span class="text-3xl">📍</span>
-        <h3 class="mt-3 text-xl font-bold text-gray-800 font-dangrek">{{ props.location }}</h3>
-        <a 
-          :href="props.mapUrl" 
-          target="_blank"
-          class="inline-flex items-center gap-2 px-6 py-2 mt-4 text-white transition-all rounded-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 font-kantumruy"
-        >
-          <span>🗺️</span>
-          <span>មើលផែនទី</span>
-        </a>
+        <!-- Schedule Items -->
+        <div class="p-6">
+          <div class="space-y-4">
+            <!-- Item 1 -->
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-amber-50">
+              <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 text-xl rounded-full bg-amber-100">
+                🎊
+              </div>
+              <div>
+                <p class="text-sm text-amber-600 font-kantumruy">ម៉ោង ៤:០០ រសៀល</p>
+                <p class="font-bold text-amber-900 font-kantumruy">ពិធីស្វាគមន៍ភ្ញៀវ</p>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-rose-50">
+              <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 text-xl rounded-full bg-rose-100">
+                💍
+              </div>
+              <div>
+                <p class="text-sm text-rose-600 font-kantumruy">ម៉ោង ៥:០០ រសៀល</p>
+                <p class="font-bold text-rose-900 font-kantumruy">ពិធីមង្គលការ</p>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-purple-50">
+              <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 text-xl rounded-full bg-purple-100">
+                🍽️
+              </div>
+              <div>
+                <p class="text-sm text-purple-600 font-kantumruy">ម៉ោង ៦:០០ ល្ងាច</p>
+                <p class="font-bold text-purple-900 font-kantumruy">ពិធីជប់លៀង</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- View Location Button -->
+          <a :href="props.mapUrl" target="_blank"
+            class="flex items-center justify-center gap-2 w-full py-4 mt-6 text-white transition-all rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 font-kantumruy">
+            <span class="text-xl">📍</span>
+            <span>មើលទីតាំង</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
