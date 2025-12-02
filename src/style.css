@@ -1,25 +1,39 @@
 @import "tailwindcss";
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* Custom animations */
+@keyframes breathing {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px 0 rgba(236, 72, 153, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.4);
+  }
 }
 
-/* Base styles */
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  background-color: #fafafa;
+@keyframes arrow-bounce {
+  0%, 100% {
+    transform: rotate(45deg) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(45deg) translateY(10px);
+    opacity: 0.5;
+  }
 }
 
-#app {
-  width: 100%;
+.animate-breathing {
+  animation: breathing 2.5s ease-in-out infinite;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -27,12 +41,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #f472b6, #ec4899);
-  border-radius: 10px;
+  background: #888;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #ec4899, #db2777);
+  background: #555;
 }
 
 /* Custom Khmer fonts */
@@ -56,15 +70,26 @@ body {
   font-family: 'Fasthand', cursive;
 }
 
+/* Down arrow animation */
+.down-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 3px solid white;
+  border-bottom: 3px solid white;
+  transform: rotate(45deg);
+  animation: arrow-bounce 1.5s infinite;
+}
+
 /* Guest name elegant styling */
 .guest-name-glow {
+  color: #FFD700;
   text-shadow: 
     0 0 10px rgba(255, 215, 0, 0.8),
     0 0 20px rgba(255, 215, 0, 0.6),
     0 0 30px rgba(255, 215, 0, 0.4),
     2px 2px 4px rgba(0, 0, 0, 0.5);
   letter-spacing: 1px;
-  animation: glow-pulse 2.5s ease-in-out infinite;
+  animation: glow-pulse 2s ease-in-out infinite;
 }
 
 @keyframes glow-pulse {
@@ -77,42 +102,20 @@ body {
   }
   50% {
     text-shadow: 
-      0 0 20px rgba(255, 215, 0, 1),
-      0 0 40px rgba(255, 215, 0, 0.8),
-      0 0 60px rgba(255, 215, 0, 0.6),
+      0 0 15px rgba(255, 215, 0, 1),
+      0 0 30px rgba(255, 215, 0, 0.8),
+      0 0 45px rgba(255, 215, 0, 0.6),
       2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 }
 
-/* Selection color */
-::selection {
-  background-color: rgba(244, 114, 182, 0.3);
-  color: inherit;
+/* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
-/* Focus styles */
-:focus {
-  outline: 2px solid rgba(236, 72, 153, 0.5);
-  outline-offset: 2px;
-}
-
-/* Link transitions */
-a {
-  transition: all 0.3s ease;
-}
-
-/* Image loading */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Card hover effects */
-.hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+#app {
+  width: 100%;
 }
