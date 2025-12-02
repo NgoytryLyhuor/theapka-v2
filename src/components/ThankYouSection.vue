@@ -1,46 +1,67 @@
 <script setup>
+import { weddingConfig } from '../config/guests'
+
 const props = defineProps({
-  backgroundImage: {
-    type: String,
-    default: 'https://theapka.com/storage/01J4TYXR517E73RV2PRB75Y5ME.jpg'
-  }
+  backgroundImage: { type: String, default: '' }
 })
 </script>
 
 <template>
-  <div 
-    id="theapka-thank-you" 
-    class="w-full text-center h-[750px] bg-center bg-cover bg-no-repeat relative"
-    :style="{ backgroundImage: `url('${props.backgroundImage}')` }"
-  >
-    <div class="absolute inset-0 bg-white opacity-30"></div>
-    <div class="absolute inset-0 flex items-center justify-center">
-      <div class="w-full px-3 mx-auto text-center text-white">
-        <div 
-          class="max-w-xl p-2 mx-auto text-xl leading-8 font-dangrek rounded-2xl" 
-          style="background: #cfbdb470"
-        >
-          <img 
-            src="https://theapka.com/storage/templates/chhay/images/thank.gif" 
-            class="h-24 mx-auto" 
-            alt="thank you"
-          >
-          <div class="mt-4">
-            វត្តមានឯកឧត្តម លោកឧកញ៉ា លោកជំទាវ លោក លោកស្រី អ្នកនាងកញ្ញា
-            ជាកិត្តិយសដ៏ឧត្តុង្គឧត្តម ចំពោះគ្រួសាររបស់យើងខ្ញុំ។
-          </div>
-          <div class="flex justify-center mx-auto">
-            <img 
-              v-for="n in 5" 
-              :key="n"
-              src="https://theapka.com/storage/templates/chhay/images/flower_2.gif" 
-              class="h-12" 
-              alt="flower"
-            >
-          </div>
-        </div>
+  <div class="relative w-full py-20 overflow-hidden">
+    <!-- Background -->
+    <div 
+      class="absolute inset-0 bg-center bg-cover"
+      :style="{ backgroundImage: `url('${props.backgroundImage || weddingConfig.thankYouBackground}')` }"
+    ></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30"></div>
+    
+    <!-- Content -->
+    <div class="relative z-10 max-w-md px-6 mx-auto text-center text-white">
+      
+      <!-- Thank you icon -->
+      <div class="mb-6 text-6xl animate-pulse">🙏</div>
+      
+      <!-- Title -->
+      <h2 class="mb-4 text-3xl font-dangrek">សូមអរគុណ</h2>
+      <p class="mb-8 text-lg text-white/80 font-kantumruy">Thank You</p>
+      
+      <!-- Message card -->
+      <div class="p-6 mb-8 thank-you-card rounded-3xl">
+        <p class="leading-8 text-white/90 font-kantumruy">
+          វត្តមានរបស់អ្នកជាកិត្តិយសដ៏ឧត្តុង្គឧត្តម ចំពោះគ្រួសាររបស់យើងខ្ញុំ។
+          សូមអរគុណដែលបានចូលរួមក្នុងថ្ងៃពិសេសរបស់យើង។
+        </p>
+      </div>
+      
+      <!-- Couple names -->
+      <div class="mb-8">
+        <p class="text-white/60 font-kantumruy">With Love,</p>
+        <p class="mt-2 text-2xl font-dangrek">
+          {{ weddingConfig.groomName }} & {{ weddingConfig.brideName }}
+        </p>
+      </div>
+      
+      <!-- Decorative flowers -->
+      <div class="flex justify-center gap-4">
+        <span class="text-3xl">🌸</span>
+        <span class="text-3xl">💕</span>
+        <span class="text-3xl">🌸</span>
+      </div>
+      
+      <!-- Footer -->
+      <div class="pt-8 mt-8 border-t border-white/20">
+        <p class="text-sm text-white/40 font-kantumruy">
+          Made with ❤️ by TheapKa.com
+        </p>
       </div>
     </div>
   </div>
 </template>
 
+<style scoped>
+.thank-you-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+</style>
