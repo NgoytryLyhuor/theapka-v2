@@ -7,10 +7,12 @@ const linkGenerated = ref(false)
 // Get base URL
 const baseUrl = window.location.origin
 
-// Clean URL (NOT encoded - for display and Telegram sharing)
+// Clean URL (only spaces encoded with %20, Khmer stays readable)
 const cleanUrl = computed(() => {
   if (!guestName.value.trim()) return ''
-  return `${baseUrl}?name=${guestName.value.trim()}`
+  // Replace spaces with %20, keep Khmer characters as-is
+  const nameWithEncodedSpaces = guestName.value.trim().replace(/ /g, '%20')
+  return `${baseUrl}?name=${nameWithEncodedSpaces}`
 })
 
 // Encoded URL (for opening - ensures it works in all browsers)
