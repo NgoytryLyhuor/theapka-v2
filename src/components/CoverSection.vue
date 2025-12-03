@@ -67,7 +67,7 @@ const { formattedDate } = useDateFormatter(weddingConfig.eventDate, true)
           <span id="event-date" class="text-2xl">{{ formattedDate }}</span>
         </div>
         <div class="leading-8">{{ weddingConfig.location }}</div>
-        <div class="flex justify-center">
+        <div class="relative flex justify-center" style="z-index: 50;">
           <add-to-calendar-button 
             size="1" 
             :name="`${weddingConfig.groomName} & ${weddingConfig.brideName}'s Wedding`"
@@ -81,6 +81,7 @@ const { formattedDate } = useDateFormatter(weddingConfig.eventDate, true)
             organizer="TheapKa.com|admin@theapka.com" 
             :description="`${weddingConfig.location}. Powered by https://theapka.com`"
             class="add-to-calendar atcb-light"
+            listStyle="modal"
           />
         </div>
       </div>
