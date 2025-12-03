@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { getGuest, formatGuestName, weddingConfig } from '../config/guests'
+import { weddingConfig } from '../config/guests'
 import CoverSection from '../components/CoverSection.vue'
 import InvitationSection from '../components/InvitationSection.vue'
 import ScheduleSection from '../components/ScheduleSection.vue'
@@ -10,15 +10,12 @@ import ThankYouSection from '../components/ThankYouSection.vue'
 
 const route = useRoute()
 
-// Get guest name from URL query param OR from config
+// Get guest name from URL slug (convert dashes back to spaces)
 const guestName = computed(() => {
-  // First check if name is passed via query parameter
-  if (route.query.name) {
-    return route.query.name
-  }
-  // Otherwise look up from guests config
-  const guest = getGuest(route.params.guestSlug)
-  return formatGuestName(guest)
+  const slug = route.params.guestSlug
+  if (!slug) return ''
+  // Convert dashes back to spaces for display
+  return slug.replace(/-/g, ' ')
 })
 </script>
 

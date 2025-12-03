@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { guestExists } from '../config/guests'
 
 const routes = [
   {
@@ -15,21 +14,7 @@ const routes = [
   {
     path: '/:guestSlug',
     name: 'guest',
-    component: () => import('../views/GuestInvitation.vue'),
-    beforeEnter: (to, from, next) => {
-      // Allow if name is passed via query param (from CreateLinkView)
-      if (to.query.name) {
-        next()
-        return
-      }
-      // Otherwise check if guest exists in config
-      if (guestExists(to.params.guestSlug)) {
-        next()
-      } else {
-        // Guest not found, go to 404
-        next({ name: 'notfound', params: { guestSlug: to.params.guestSlug } })
-      }
-    }
+    component: () => import('../views/GuestInvitation.vue')
   },
   {
     path: '/not-found/:guestSlug?',
