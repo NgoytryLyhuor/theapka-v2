@@ -39,7 +39,7 @@ const props = defineProps({
         </div>
         <div class="flex-1 text-center">
           <a 
-            class="font-bold" 
+            class="font-bold font-dangrek" 
             :href="props.mapUrl" 
             target="_blank"
           >

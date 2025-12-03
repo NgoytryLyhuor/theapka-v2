@@ -70,6 +70,10 @@
   font-family: 'Fasthand', cursive;
 }
 
+.font-moul {
+  font-family: 'Moul', serif;
+}
+
 /* Down arrow animation */
 .down-arrow {
   width: 20px;

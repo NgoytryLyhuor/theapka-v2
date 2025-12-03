@@ -54,7 +54,7 @@ const { formattedDate } = useDateFormatter(weddingConfig.eventDate, true)
           <!-- Display Guest Name Here -->
           <div 
             v-if="props.guestName"
-            class="-mt-[36px] text-xl font-dangrek font-bold"
+            class="-mt-[36px] text-xl font-moul font-bold"
             style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);"
           >
             {{ props.guestName }}
