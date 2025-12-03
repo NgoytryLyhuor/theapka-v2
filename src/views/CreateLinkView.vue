@@ -45,7 +45,7 @@ const openLink = () => {
 
 // Share message text
 const shareMessage = computed(() => {
-  return `💒 សិរីមង្គលអាពាហ៍ពិពាហ៍ 💕\n\nសូមគោរពអញ្ជើញ ${nameInput.value}\nមកចូលរួមពិធីមង្គលអាពាហ៍ពិពាហ៍\n\nង៉ុយទ្រី លីហួរ & ជិន ស្រីរតន៍\n\n👆 សូមចុចតំណភ្ជាប់ខាងលើ`
+  return `សូមគោរពអញ្ជើញ ${nameInput.value}\nមកចូលរួមពិធីមង្គលអាពាហ៍ពិពាហ៍\n\nង៉ុយទ្រី លីហួរ & ជិន ស្រីរតន៍`
 })
 
 // Share to Telegram
