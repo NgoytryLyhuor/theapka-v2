@@ -10,9 +10,15 @@ const props = defineProps({
 <template>
   <div 
     id="theapka-thank-you" 
-    class="w-full text-center h-[750px] bg-center bg-cover bg-no-repeat relative"
-    :style="{ backgroundImage: `url('${props.backgroundImage}')` }"
+    class="w-full text-center h-[750px] relative overflow-hidden"
   >
+    <!-- Background Image as img tag for PDF support -->
+    <img 
+      :src="props.backgroundImage" 
+      alt="thank you background" 
+      class="absolute inset-0 object-cover object-center w-full h-full"
+      crossorigin="anonymous"
+    />
     <div class="absolute inset-0 bg-white opacity-30"></div>
     <div class="absolute inset-0 flex items-center justify-center">
       <div class="w-full px-3 mx-auto text-center text-white">

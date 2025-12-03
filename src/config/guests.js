@@ -39,11 +39,11 @@ export const weddingConfig = {
   startTime: '16:00',
   endDate: '2026-01-25',
   endTime: '21:00',
-  location: 'ភ្នំពេញ',
+  location: 'គេហដ្ឋានខាងស្រី ភូមិសែនសុខទី១ សង្កាត់ឃ្មួញ ខណ្ឌសែនសុខ រាជធានីភ្នំពេញ',
   mapUrl: 'https://goo.gl/maps/m6QhfxtiAx7g51yy6',
-  coverImage: 'https://theapka.com/storage/01J4TYS7MK4C29A1T4EDG4V9JZ.jpg',
-  scheduleBackground: 'https://theapka.com/storage/01J4TYV5XJP7PKF7RPH3KE6238.jpg',
-  thankYouBackground: 'https://theapka.com/storage/01J4TYXR517E73RV2PRB75Y5ME.jpg'
+  coverImage: '/src/images/img-1.jpg',
+  scheduleBackground: '/src/images/img-2.jpg',
+  thankYouBackground: '/src/images/img-3.jpg'
 }
 
 // Helper function to get guest by slug

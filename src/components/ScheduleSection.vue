@@ -18,9 +18,15 @@ const props = defineProps({
 <template>
   <div 
     id="theapka-schedule-background" 
-    class="w-full text-center h-[750px] lg:h-[850px] bg-center lg:bg-top bg-cover lg:bg-contain bg-no-repeat relative"
-    :style="{ backgroundImage: `url('${props.backgroundImage}')` }"
+    class="w-full text-center h-[750px] lg:h-[850px] relative overflow-hidden"
   >
+    <!-- Background Image as img tag for PDF support -->
+    <img 
+      :src="props.backgroundImage" 
+      alt="schedule background" 
+      class="absolute inset-0 object-cover object-center w-full h-full lg:object-top lg:object-contain"
+      crossorigin="anonymous"
+    />
     <div class="absolute inset-0 bg-white opacity-50"></div>
     <div class="absolute inset-0 flex items-center justify-center">
       <div class="w-full max-w-xl px-3 py-8 mx-auto text-black">

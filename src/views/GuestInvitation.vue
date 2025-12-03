@@ -10,9 +10,16 @@ import ThankYouSection from '../components/ThankYouSection.vue'
 
 const route = useRoute()
 
-// Get guest data from config
-const guest = computed(() => getGuest(route.params.guestSlug))
-const guestName = computed(() => formatGuestName(guest.value))
+// Get guest name from URL query param OR from config
+const guestName = computed(() => {
+  // First check if name is passed via query parameter
+  if (route.query.name) {
+    return route.query.name
+  }
+  // Otherwise look up from guests config
+  const guest = getGuest(route.params.guestSlug)
+  return formatGuestName(guest)
+})
 </script>
 
 <template>

@@ -18,9 +18,15 @@ const { formattedDate } = useDateFormatter(weddingConfig.eventDate, true)
 <template>
   <div 
     id="theapka-cover" 
-    class="w-full h-[650px] relative bg-center bg-cover bg-no-repeat"
-    :style="{ backgroundImage: `url('${weddingConfig.coverImage}')` }"
+    class="w-full h-[650px] relative overflow-hidden"
   >
+    <!-- Background Image as img tag for PDF support -->
+    <img 
+      :src="weddingConfig.coverImage" 
+      alt="cover" 
+      class="absolute inset-0 object-cover object-center w-full h-full"
+      crossorigin="anonymous"
+    />
     <div class="absolute inset-0 opacity-50 bg-gradient-to-b from-gray-500 to-transparent"></div>
     <div class="absolute inset-0 flex flex-col pt-12 text-2xl text-center text-white font-moulpali">
       <div class="drop-shadow-xl">{{ weddingConfig.title }}</div>
@@ -48,7 +54,8 @@ const { formattedDate } = useDateFormatter(weddingConfig.eventDate, true)
           <!-- Display Guest Name Here -->
           <div 
             v-if="props.guestName"
-            class="-mt-[36px] text-xl font-dangrek font-bold guest-name-glow"
+            class="-mt-[36px] text-xl font-dangrek font-bold"
+            style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);"
           >
             {{ props.guestName }}
           </div>
@@ -75,12 +82,6 @@ const { formattedDate } = useDateFormatter(weddingConfig.eventDate, true)
             :description="`${weddingConfig.location}. Powered by https://theapka.com`"
             class="add-to-calendar atcb-light"
           />
-        </div>
-      </div>
-
-      <div class="absolute bottom-3 left-5">
-        <div class="w-full h-[50px]">
-          <div class="down-arrow"></div>
         </div>
       </div>
     </div>

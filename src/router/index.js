@@ -8,11 +8,21 @@ const routes = [
     component: () => import('../views/HomeView.vue')
   },
   {
+    path: '/create',
+    name: 'create',
+    component: () => import('../views/CreateLinkView.vue')
+  },
+  {
     path: '/:guestSlug',
     name: 'guest',
     component: () => import('../views/GuestInvitation.vue'),
     beforeEnter: (to, from, next) => {
-      // Check if guest exists in config
+      // Allow if name is passed via query param (from CreateLinkView)
+      if (to.query.name) {
+        next()
+        return
+      }
+      // Otherwise check if guest exists in config
       if (guestExists(to.params.guestSlug)) {
         next()
       } else {
