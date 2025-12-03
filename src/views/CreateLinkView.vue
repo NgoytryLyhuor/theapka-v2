@@ -45,9 +45,9 @@ const openLink = () => {
   window.open(generatedUrl.value, '_blank')
 }
 
-// Share message text
+// Share message text (cleaner - no URL in text, Telegram will show preview)
 const shareMessage = computed(() => {
-  return `សូមគោរពអញ្ជើញ ${guestName.value} មកចូលរួមពិធីមង្គលអាពាហ៍ពិពាហ៍ 💒💕\n\nសូមចុចតំណភ្ជាប់ខាងក្រោម:`
+  return `💒 សិរីមង្គលអាពាហ៍ពិពាហ៍ 💕\n\nសូមគោរពអញ្ជើញ ${guestName.value}\nមកចូលរួមពិធីមង្គលអាពាហ៍ពិពាហ៍\n\nង៉ុយទ្រី លីហួរ & ជិន ស្រីរតន៍`
 })
 
 // Share to Telegram
@@ -55,13 +55,6 @@ const shareToTelegram = () => {
   const text = encodeURIComponent(shareMessage.value)
   const url = encodeURIComponent(generatedUrl.value)
   window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank')
-}
-
-// Share to Messenger
-const shareToMessenger = () => {
-  const url = encodeURIComponent(generatedUrl.value)
-  // Try mobile Messenger first, fallback to web
-  window.open(`https://www.facebook.com/dialog/send?link=${url}&app_id=291494419107518&redirect_uri=${encodeURIComponent(window.location.href)}`, '_blank')
 }
 
 const reset = () => {
@@ -159,31 +152,19 @@ const reset = () => {
           </button>
         </div>
 
-        <!-- Share Buttons -->
+        <!-- Share to Telegram -->
         <div>
           <p class="mb-3 text-sm text-center font-kantumruy" style="color: #6b7280;">Share to / ចែករំលែកទៅ</p>
-          <div class="flex gap-3">
-            <button 
-              @click="shareToTelegram"
-              class="flex-1 py-3 text-white font-kantumruy rounded-xl flex items-center justify-center gap-2"
-              style="background-color: #0088cc;"
-              @mouseenter="$event.target.style.backgroundColor = '#006699'"
-              @mouseleave="$event.target.style.backgroundColor = '#0088cc'"
-            >
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-              Telegram
-            </button>
-            <button 
-              @click="shareToMessenger"
-              class="flex-1 py-3 text-white font-kantumruy rounded-xl flex items-center justify-center gap-2"
-              style="background: linear-gradient(45deg, #0078FF, #00C6FF);"
-              @mouseenter="$event.target.style.opacity = '0.9'"
-              @mouseleave="$event.target.style.opacity = '1'"
-            >
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.614 4.469 8.654V24l4.088-2.242c1.092.301 2.246.464 3.443.464 6.627 0 12-4.975 12-11.111S18.627 0 12 0zm1.191 14.963l-3.055-3.26-5.963 3.26L10.732 8l3.131 3.259L19.752 8l-6.561 6.963z"/></svg>
-              Messenger
-            </button>
-          </div>
+          <button 
+            @click="shareToTelegram"
+            class="w-full py-3 text-white font-kantumruy rounded-xl flex items-center justify-center gap-2"
+            style="background-color: #0088cc;"
+            @mouseenter="$event.target.style.backgroundColor = '#006699'"
+            @mouseleave="$event.target.style.backgroundColor = '#0088cc'"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            Share to Telegram
+          </button>
         </div>
 
         <!-- Create Another -->
