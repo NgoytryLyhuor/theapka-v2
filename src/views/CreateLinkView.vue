@@ -47,9 +47,9 @@ const openLink = () => {
   window.open(encodedUrl.value, '_blank')
 }
 
-// Share message text (cleaner - no URL in text, Telegram will show preview)
+// Share message text - instruct users to click the link above
 const shareMessage = computed(() => {
-  return `💒 សិរីមង្គលអាពាហ៍ពិពាហ៍ 💕\n\nសូមគោរពអញ្ជើញ ${guestName.value}\nមកចូលរួមពិធីមង្គលអាពាហ៍ពិពាហ៍\n\nង៉ុយទ្រី លីហួរ & ជិន ស្រីរតន៍`
+  return `💒 សិរីមង្គលអាពាហ៍ពិពាហ៍ 💕\n\nសូមគោរពអញ្ជើញ ${guestName.value}\nមកចូលរួមពិធីមង្គលអាពាហ៍ពិពាហ៍\n\nង៉ុយទ្រី លីហួរ & ជិន ស្រីរតន៍\n\n👆 សូមចុចតំណភ្ជាប់ខាងលើ`
 })
 
 // Share to Telegram (use clean URL so Telegram shows nice Khmer text)
