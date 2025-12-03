@@ -41,9 +41,9 @@ export const weddingConfig = {
   endTime: '21:00',
   location: 'គេហដ្ឋានខាងស្រី ភូមិសែនសុខទី១ សង្កាត់ឃ្មួញ ខណ្ឌសែនសុខ រាជធានីភ្នំពេញ',
   mapUrl: 'https://goo.gl/maps/m6QhfxtiAx7g51yy6',
-  coverImage: '/src/images/img-1.jpg',
-  scheduleBackground: '/src/images/img-2.jpg',
-  thankYouBackground: '/src/images/img-3.jpg'
+  coverImage: '/images/img-1.jpg',
+  scheduleBackground: '/images/img-2.jpg',
+  thankYouBackground: '/images/img-3.jpg'
 }
 
 // Helper function to get guest by slug

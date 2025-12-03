@@ -18,7 +18,7 @@ const props = defineProps({
       <div>{{ props.location }}</div>
       <div class="flex justify-center mt-5 mb-5">
         <!-- QR Code Image -->
-        <img src="/src/images/qr-code.png" alt="QR Code" class="w-[250px] h-[250px]" />
+        <img src="/images/qr-code.png" alt="QR Code" class="w-[250px] h-[250px]" />
       </div>
       <a 
         :href="props.mapUrl" 
