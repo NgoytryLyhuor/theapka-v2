@@ -2,47 +2,37 @@
 import { ref, computed } from 'vue'
 
 const guestName = ref('')
-const urlSlug = ref('')
 const linkGenerated = ref(false)
 
 // Get base URL
 const baseUrl = window.location.origin
 
-// Clean the slug: lowercase, replace spaces with dashes, remove special chars
-const cleanSlug = computed(() => {
-  return urlSlug.value
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9-]/g, '')
+// Clean URL (NOT encoded - for display and Telegram sharing)
+const cleanUrl = computed(() => {
+  if (!guestName.value.trim()) return ''
+  return `${baseUrl}?name=${guestName.value.trim()}`
 })
 
-// Generate the full URL (encoded for actual use)
-const generatedUrl = computed(() => {
-  if (!guestName.value.trim() || !cleanSlug.value) return ''
-  return `${baseUrl}/${cleanSlug.value}?name=${encodeURIComponent(guestName.value.trim())}`
-})
-
-// Clean display URL (readable, for showing to user)
-const displayUrl = computed(() => {
-  if (!guestName.value.trim() || !cleanSlug.value) return ''
-  return `${baseUrl}/${cleanSlug.value}?name=${guestName.value.trim()}`
+// Encoded URL (for opening - ensures it works in all browsers)
+const encodedUrl = computed(() => {
+  if (!guestName.value.trim()) return ''
+  return `${baseUrl}?name=${encodeURIComponent(guestName.value.trim())}`
 })
 
 const generateLink = () => {
-  if (guestName.value.trim() && urlSlug.value.trim()) {
+  if (guestName.value.trim()) {
     linkGenerated.value = true
   }
 }
 
 const copyLink = async () => {
   try {
-    await navigator.clipboard.writeText(generatedUrl.value)
+    await navigator.clipboard.writeText(cleanUrl.value)
     alert('Link copied! តំណភ្ជាប់បានចម្លងហើយ!')
   } catch (err) {
     // Fallback for older browsers
     const textArea = document.createElement('textarea')
-    textArea.value = generatedUrl.value
+    textArea.value = cleanUrl.value
     document.body.appendChild(textArea)
     textArea.select()
     document.execCommand('copy')
@@ -52,7 +42,7 @@ const copyLink = async () => {
 }
 
 const openLink = () => {
-  window.open(generatedUrl.value, '_blank')
+  window.open(encodedUrl.value, '_blank')
 }
 
 // Share message text (cleaner - no URL in text, Telegram will show preview)
@@ -60,16 +50,15 @@ const shareMessage = computed(() => {
   return `💒 សិរីមង្គលអាពាហ៍ពិពាហ៍ 💕\n\nសូមគោរពអញ្ជើញ ${guestName.value}\nមកចូលរួមពិធីមង្គលអាពាហ៍ពិពាហ៍\n\nង៉ុយទ្រី លីហួរ & ជិន ស្រីរតន៍`
 })
 
-// Share to Telegram
+// Share to Telegram (use clean URL so Telegram shows nice Khmer text)
 const shareToTelegram = () => {
   const text = encodeURIComponent(shareMessage.value)
-  const url = encodeURIComponent(generatedUrl.value)
+  const url = encodeURIComponent(cleanUrl.value)
   window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank')
 }
 
 const reset = () => {
   guestName.value = ''
-  urlSlug.value = ''
   linkGenerated.value = false
 }
 </script>
@@ -96,47 +85,24 @@ const reset = () => {
             placeholder="ឧ. លោក សុខា និង ភរិយា"
             class="w-full px-4 py-3 font-dangrek rounded-xl"
             style="color: #1f2937; border: 2px solid #fbcfe8; outline: none;"
+            @keyup.enter="generateLink"
             @focus="$event.target.style.borderColor = '#f472b6'"
             @blur="$event.target.style.borderColor = '#fbcfe8'"
           />
           <p class="mt-1 text-xs font-kantumruy" style="color: #9ca3af;">ឈ្មោះនេះនឹងបង្ហាញនៅលើការ្តអញ្ជើញ</p>
         </div>
 
-        <!-- URL Slug Input -->
-        <div>
-          <label class="block mb-2 text-sm font-medium font-kantumruy" style="color: #374151;">
-            ឈ្មោះសម្រាប់ Link / URL Name
-          </label>
-          <div class="flex items-center rounded-xl" style="border: 2px solid #fbcfe8;">
-            <span class="px-3 font-kantumruy" style="color: #9ca3af;">/</span>
-            <input 
-              v-model="urlSlug"
-              type="text" 
-              placeholder="lok-sokha"
-              class="flex-1 px-2 py-3 rounded-r-xl"
-              style="color: #1f2937; outline: none; border: none;"
-              @keyup.enter="generateLink"
-            />
-          </div>
-          <p class="mt-1 text-xs font-kantumruy" style="color: #9ca3af;">ប្រើអក្សរអង់គ្លេស និង សហសញ្ញា (-) ប៉ុណ្ណោះ</p>
-          
-          <!-- Live Preview -->
-          <div v-if="cleanSlug && guestName.trim()" class="p-2 mt-2 text-sm rounded-lg font-kantumruy" style="background-color: #fdf2f8; color: #db2777;">
-            Preview: {{ baseUrl }}/<strong>{{ cleanSlug }}</strong>?name=...
-          </div>
-        </div>
-
         <!-- Generate Button -->
         <button 
           @click="generateLink"
-          :disabled="!guestName.trim() || !urlSlug.trim()"
+          :disabled="!guestName.trim()"
           class="w-full py-3 text-white font-kantumruy rounded-xl"
           :style="{ 
-            backgroundColor: (guestName.trim() && urlSlug.trim()) ? '#ec4899' : '#d1d5db',
-            cursor: (guestName.trim() && urlSlug.trim()) ? 'pointer' : 'not-allowed'
+            backgroundColor: guestName.trim() ? '#ec4899' : '#d1d5db',
+            cursor: guestName.trim() ? 'pointer' : 'not-allowed'
           }"
-          @mouseenter="$event.target.style.backgroundColor = (guestName.trim() && urlSlug.trim()) ? '#db2777' : '#d1d5db'"
-          @mouseleave="$event.target.style.backgroundColor = (guestName.trim() && urlSlug.trim()) ? '#ec4899' : '#d1d5db'"
+          @mouseenter="$event.target.style.backgroundColor = guestName.trim() ? '#db2777' : '#d1d5db'"
+          @mouseleave="$event.target.style.backgroundColor = guestName.trim() ? '#ec4899' : '#d1d5db'"
         >
           បង្កើតតំណភ្ជាប់ / Generate Link
         </button>
@@ -156,14 +122,12 @@ const reset = () => {
         <div class="p-4 rounded-xl" style="background-color: #f9fafb;">
           <p class="mb-1 text-sm font-kantumruy" style="color: #6b7280;">Guest Name / ឈ្មោះភ្ញៀវ:</p>
           <p class="text-lg font-dangrek" style="color: #1f2937;">{{ guestName }}</p>
-          <p class="mt-2 mb-1 text-sm font-kantumruy" style="color: #6b7280;">URL Slug:</p>
-          <p class="font-kantumruy" style="color: #1f2937;">/{{ cleanSlug }}</p>
         </div>
 
         <!-- Generated Link -->
         <div class="p-4 rounded-xl" style="background-color: #fdf2f8; border: 2px solid #fbcfe8;">
           <p class="mb-2 text-sm font-kantumruy" style="color: #6b7280;">Invitation Link:</p>
-          <p class="text-sm break-all font-dangrek" style="color: #db2777;">{{ displayUrl }}</p>
+          <p class="text-sm break-all font-dangrek" style="color: #db2777;">{{ cleanUrl }}</p>
         </div>
 
         <!-- Action Buttons -->
